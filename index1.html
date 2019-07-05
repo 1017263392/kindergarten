@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="title" content="ScoopThemes">
+<meta name="ROBOTS" content="">
+<meta name="description" content="">
+<meta name="abstract" content="">
+
+<title>公告</title>
+
+<!-- Bootstrap -->
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/font-awesome.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/animations.css">
+
+<!-- siimple style -->
+<link href="assets/css/style.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+<div class="cloud floating">
+	<img src="assets/img/cloud.png" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos1 fliped floating">
+	<img src="assets/img/cloud.png" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos2 floating">
+	<img src="assets/img/cloud.png" alt="Scoop Themes">
+</div>
+
+<div class="cloud pos3 fliped floating">
+	<img src="assets/img/cloud.png" alt="Scoop Themes">
+</div>
+
+
+<div id="wrapper">
+	<div class="container">
+		<div class="row" style=>
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<h1>公告</h1>
+				<br/>
+				<br/>
+				<h2 class="subtitle">哈尔滨市幼儿师范附属幼儿园
+					<br>	
+				欢迎您报名
+				<br>
+				本系统将于
+				<br>	
+				2019年7月11日8点30分正式开启。
+				<br>
+				网上注册时间为：
+				<br>	
+				2019年7月11日8：30-7月13日11:30分。
+				<br>
+				报名时间为：
+				<br>	
+
+				2019年7月14日8：30分，
+				<br>
+				额满为止。
+				<br>详细情况请咨询:
+				<br>0451-82521301  0451-87527192
+				</h2>
+				
+		</div>
+	</div>
+</div>
+
+
+<script src="assets/js/jquery-1.8.3.min.js"></script>
+<script src="assets/js/jquery.form-n-validate.js"></script>
+<script>
+	
+$(document).ready( function () {
+$('#wrapper').height($(document).height());
+// I only have one form on the page but you can be more specific if need be.
+var $form = $('form');
+
+if ( $form.length > 0 ) {
+	$('form input[type="submit"]').bind('click', function ( event ) {
+		if ( event ) event.preventDefault();
+		// validate_input() is a validation function I wrote, you'll have to substitute this with your own.
+		if ( $form.validate() ) { register($form); }
+	});
+}
+});
+
+function appendResult(userText , className, iconClass){
+var resultHTML = "<div class='stretchLeft result "+ className + "'>" + userText + " <span class='fa fa-" + iconClass + "'></span>" + "</div>";
+$('body').append(resultHTML);
+$('.result').delay(10000).fadeOut('1000');
+}
+
+
+function register($form) {
+$.ajax({
+	type: $form.attr('method'),
+	url: $form.attr('action'),
+	data: $form.serialize(),
+	cache       : false,
+	dataType    : 'json',
+	contentType: "application/json; charset=utf-8",
+	error       : function(err) { alert("Could not connect to the registration server. Please try again later."); },
+	success     : function(data) {
+		if (data.result != "success") {
+			appendResult('Wrong Email Or You Are Already Registered, Try Again', 'error', 'exclamation');
+		} else {
+			// It worked, carry on...
+			appendResult('Successful, Check Your Email For Confirmation ', 'success', 'check');
+		}
+	}
+});
+}
+</script>
+
+</body>
+</html>
